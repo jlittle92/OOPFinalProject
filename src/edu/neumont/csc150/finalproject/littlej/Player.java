@@ -1,17 +1,14 @@
 package edu.neumont.csc150.finalproject.littlej;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Player {
 
-	private enum Color {RED, BLACK};
-	private final int MAX_PIECES = 12;
-	private int pieceCount;
-	private ArrayList<Piece> pieces;
+	private enum Color {WHITE, BLACK}
+	private HashMap<String, Piece> pieces;
 	
-	public Player(){
-		setPieceCount(MAX_PIECES);
-		pieces = new ArrayList<Piece>(MAX_PIECES);
+	public Player(HashMap<String, Piece> lunchables){
+		pieces = lunchables;
 	}
 	
 	public void move(){
@@ -32,14 +29,6 @@ public class Player {
 	
 	private void checkDraw(){
 		
-	}
-
-	public int getPieceCount() {
-		return pieceCount;
-	}
-
-	public void setPieceCount(int pieceCount) {
-		this.pieceCount = pieceCount;
 	}
 	
 }

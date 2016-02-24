@@ -2,14 +2,18 @@ package edu.neumont.csc150.finalproject.littlej;
 
 import java.awt.Point;
 
-public class Piece {
+public abstract class Piece extends ImageComponent implements Movable{
 
 	private Point position;
-	private boolean isKing;
+	/*How to deal with check/mate?*/
 	
 	public Piece(Point p){
 		setPosition(p);
-		setKing(false);
+	}
+	
+	public Piece(int x, int y){
+		Point p = new Point(x, y);
+		setPosition(p);
 	}
 
 	public Point getPosition() {
@@ -18,14 +22,6 @@ public class Piece {
 
 	public void setPosition(Point position) {
 		this.position = position;
-	}
-
-	public boolean isKing() {
-		return isKing;
-	}
-
-	public void setKing(boolean isKing) {
-		this.isKing = isKing;
 	}
 	
 }

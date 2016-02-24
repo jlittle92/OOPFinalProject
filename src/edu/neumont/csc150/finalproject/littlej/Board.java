@@ -1,10 +1,18 @@
 package edu.neumont.csc150.finalproject.littlej;
 
-public class Board {
+import java.util.HashMap;
 
-	private static final char EMPTY = ' ', OTHEREMPTY = '-';
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class Board extends JFrame{
+
 	private static final int ROWS = 8, COLUMNS = 8;
-	private static char [][] board = new char[ROWS][COLUMNS];
+	private static JButton [][] board = new JButton[ROWS][COLUMNS];
+	
+	public Board(HashMap<String, Piece> pieces){
+		
+	}
 	
 	public void resetBoard()
 	{
