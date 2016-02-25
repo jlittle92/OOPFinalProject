@@ -2,33 +2,22 @@ package edu.neumont.csc150.finalproject.littlej;
 
 import java.util.HashMap;
 
-public class Player {
+public abstract class Player {
 
-	private enum Color {WHITE, BLACK}
 	private HashMap<String, Piece> pieces;
 	
 	public Player(HashMap<String, Piece> lunchables){
 		pieces = lunchables;
 	}
 	
-	public void move(){
-		
-	}
+	public abstract void move();
 	
-	private void checkValid(){
-		
-	}
+	public abstract void checkValid();
 	
-	private void checkKing(){
-		
-	}
+	public abstract void checkForCheck();
 	
-	private void checkWin(){
-		
-	}
+	public abstract void checkWin();
 	
-	private void checkDraw(){
-		
-	}
+	public abstract void checkDraw();
 	
 }

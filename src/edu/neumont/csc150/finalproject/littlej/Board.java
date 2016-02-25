@@ -1,5 +1,7 @@
 package edu.neumont.csc150.finalproject.littlej;
 
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.util.HashMap;
 
 import javax.swing.JButton;
@@ -8,49 +10,36 @@ import javax.swing.JFrame;
 public class Board extends JFrame{
 
 	private static final int ROWS = 8, COLUMNS = 8;
-	private static JButton [][] board = new JButton[ROWS][COLUMNS];
+	private static final Color WHITE = Color.WHITE, BLACK = Color.BLACK;
+	private static JButton [][] board;
 	
-	public Board(HashMap<String, Piece> pieces){
+	public Board(){
+		GridLayout grid = new GridLayout(ROWS, COLUMNS);
 		
-	}
-	
-	public void resetBoard()
-	{
-		for (int row = 0; row < ROWS; row++){
-			for (int col = 0; col < COLUMNS; col++){
-				if((row % 2 == 0 && col % 2 == 0) || (row % 2 != 0 && col % 2 != 0)){
-					getBoard()[row][col] = EMPTY;
+		JFrame frame = new JFrame();
+		frame.setSize(800, 800);
+		frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		frame.setTitle("Chess");
+		frame.setLayout(grid);
+		
+		board = new Square[ROWS][COLUMNS];
+		
+		for(int i = 0; i < ROWS; i++){
+			for(int j = 0; j < COLUMNS; j++){
+				board[i][j] = new Square(i, j);
+				frame.add(board[i][j]);
+				if((i % 2 == 0 && j % 2 == 0) || (i % 2 != 0 && j % 2 != 0)){
+					board[i][j].setBackground(WHITE);
 				}
 				else{
-					getBoard()[row][col] = OTHEREMPTY;
+					board[i][j].setBackground(BLACK);
 				}
 			}
 		}
-	}
-	
-	public void printBoard()
-	{
-		System.out.println("+---+---+---+---+---+---+---+---+");
-		for (int row = 0; row < ROWS; row++){
-			System.out.print("| ");
-			for (int col = 0; col < COLUMNS; col++){
-				System.out.print(getBoard()[row][col] + " | ");
-			}
-			System.out.println();
-			System.out.println("+---+---+---+---+---+---+---+---+");
-		}
-	}
-
-	public static char[][] getBoard() {
-		return board;
-	}
-
-	public static void setBoard(char[][] board) {
-		Board.board = board;
-	}
-
-	public static char getEmpty() {
-		return EMPTY;
+		
+		//Put pieces on the board squares
+		
+		frame.setVisible(true);
 	}
 	
 }
