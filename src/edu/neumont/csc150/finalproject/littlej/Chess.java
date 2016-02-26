@@ -1,5 +1,6 @@
 package edu.neumont.csc150.finalproject.littlej;
 
+import java.awt.Point;
 import java.util.HashMap;
 
 public class Chess {
@@ -10,17 +11,18 @@ public class Chess {
 	
 	private Player playerOne, playerTwo;
 	private Board board;
-	private HashMap<String, Piece> pieces;
-	private HashMap<String, Piece> whitePieces;
-	private HashMap<String, Piece> blackPieces;
+	private HashMap<Point, Piece> pieces;
+	private HashMap<Point, Piece> whitePieces;
+	private HashMap<Point, Piece> blackPieces;
 
 	public Chess(){
-		pieces = new HashMap<String, Piece>(32);
-		blackPieces = new HashMap<String, Piece>(16);
-		whitePieces = new HashMap<String, Piece>(16);
+		pieces = new HashMap<Point, Piece>(32);
+		blackPieces = new HashMap<Point, Piece>(16);
+		whitePieces = new HashMap<Point, Piece>(16);
 		addPieces();
 		addPlayers();
 		board = new Board();
+		/*pieces on squares*/
 		/*gameLoop();*/
 	}
 	
@@ -56,7 +58,8 @@ public class Chess {
 		 for(int x = row; x < col; x++){
 			 for(int y = 0; y < 8; y++){
 				 Piece pawn = new Pawn(x, y, t, p.toString());
-				 pieces.put(p.toString(), pawn);
+				 Point pos = new Point(x, y);
+				 pieces.put(pos, pawn);
 				 addToPlayer(pawn, t);
 			 }
 		 }
@@ -64,35 +67,40 @@ public class Chess {
 	 
 	 private void addRooks(int posX, int posY, Team t, PieceType p){
 		 Piece rook = new Rook(posX, posY, t, p.toString());
-		 pieces.put(p.toString(), rook);
+		 Point pos = new Point(posX, posY);
+		 pieces.put(pos, rook);
 	 }
 	 
 	 private void addKnights(int posX, int posY, Team t, PieceType p){
 		 Piece knight = new Knight(posX, posY, t, p.toString());
-		 pieces.put(p.toString(), knight);
+		 Point pos = new Point(posX, posY);
+		 pieces.put(pos, knight);
 	 }
 	 
 	 private void addBishops(int posX, int posY, Team t, PieceType p){
 		 Piece bishop = new Bishop(posX, posY, t, p.toString());
-		 pieces.put(p.toString(), bishop);
+		 Point pos = new Point(posX, posY);
+		 pieces.put(pos, bishop);
 	 }
 	 
 	 private void addKings(int posX, int posY, Team t, PieceType p){
 		 Piece king = new King(posX, posY, t, p.toString());
-		 pieces.put(p.toString(), king);
+		 Point pos = new Point(posX, posY);
+		 pieces.put(pos, king);
 	 }
 	 
 	 private void addQueens(int posX, int posY, Team t, PieceType p){
 		 Piece queen = new Queen(posX, posY, t, p.toString());
-		 pieces.put(p.toString(), queen);
+		 Point pos = new Point(posX, posY);
+		 pieces.put(pos, queen);
 	 }
 	 
 	 private void addToPlayer(Piece p, Team t){
 		if(t.toString().equalsIgnoreCase(Team.WHITE.toString())){
-			whitePieces.put(p.toString(), p); 
+			whitePieces.put(p.getLocation(), p); 
 		}
 		else{
-			blackPieces.put(p.toString(), p);
+			blackPieces.put(p.getLocation(), p);
 		}
 		
 	 }

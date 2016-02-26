@@ -1,12 +1,13 @@
 package edu.neumont.csc150.finalproject.littlej;
 
+import java.awt.Point;
 import java.util.HashMap;
 
 public abstract class Player {
 
-	private HashMap<String, Piece> pieces;
+	private HashMap<Point, Piece> pieces;
 	
-	public Player(HashMap<String, Piece> lunchables){
+	public Player(HashMap<Point, Piece> lunchables){
 		pieces = lunchables;
 	}
 	
