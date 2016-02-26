@@ -19,10 +19,9 @@ public class Chess {
 		pieces = new HashMap<Point, Piece>(32);
 		blackPieces = new HashMap<Point, Piece>(16);
 		whitePieces = new HashMap<Point, Piece>(16);
-		addPieces();
 		addPlayers();
-		board = new Board();
-		/*pieces on squares*/
+		addPieces();
+		board = new Board(pieces);
 		/*gameLoop();*/
 	}
 	
@@ -48,10 +47,10 @@ public class Chess {
 		 addBishops(0, 5, Team.BLACK, PieceType.BISHOP);
 		 addBishops(7, 2, Team.WHITE, PieceType.BISHOP);
 		 addBishops(7, 5, Team.WHITE, PieceType.BISHOP);
-		 addKings(0, 4, Team.BLACK, PieceType.KING);
-		 addKings(7, 3, Team.WHITE, PieceType.KING);
-		 addQueens(0, 3, Team.BLACK, PieceType.QUEEN);
-		 addQueens(7, 4, Team.WHITE, PieceType.QUEEN);
+		 addKings(0, 3, Team.BLACK, PieceType.KING);
+		 addKings(7, 4, Team.WHITE, PieceType.KING);
+		 addQueens(0, 4, Team.BLACK, PieceType.QUEEN);
+		 addQueens(7, 3, Team.WHITE, PieceType.QUEEN);
 	 }
 	
 	 private void addPawns(int row, int col, Team t, PieceType p){
@@ -69,30 +68,35 @@ public class Chess {
 		 Piece rook = new Rook(posX, posY, t, p.toString());
 		 Point pos = new Point(posX, posY);
 		 pieces.put(pos, rook);
+		 addToPlayer(rook, t);
 	 }
 	 
 	 private void addKnights(int posX, int posY, Team t, PieceType p){
 		 Piece knight = new Knight(posX, posY, t, p.toString());
 		 Point pos = new Point(posX, posY);
 		 pieces.put(pos, knight);
+		 addToPlayer(knight, t);
 	 }
 	 
 	 private void addBishops(int posX, int posY, Team t, PieceType p){
 		 Piece bishop = new Bishop(posX, posY, t, p.toString());
 		 Point pos = new Point(posX, posY);
 		 pieces.put(pos, bishop);
+		 addToPlayer(bishop, t);
 	 }
 	 
 	 private void addKings(int posX, int posY, Team t, PieceType p){
 		 Piece king = new King(posX, posY, t, p.toString());
 		 Point pos = new Point(posX, posY);
 		 pieces.put(pos, king);
+		 addToPlayer(king, t);
 	 }
 	 
 	 private void addQueens(int posX, int posY, Team t, PieceType p){
 		 Piece queen = new Queen(posX, posY, t, p.toString());
 		 Point pos = new Point(posX, posY);
 		 pieces.put(pos, queen);
+		 addToPlayer(queen, t);
 	 }
 	 
 	 private void addToPlayer(Piece p, Team t){
