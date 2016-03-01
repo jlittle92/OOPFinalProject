@@ -32,71 +32,48 @@ public class Chess {
 	 */
 	
 	 private void addPieces(){
-		 //Find a way to make this process more efficient
-		 addPawns(6, 7, Team.WHITE, PieceType.PAWN);
-		 addPawns(1, 2, Team.BLACK, PieceType.PAWN);
-		 addRooks(0, 0, Team.BLACK, PieceType.ROOK);
-		 addRooks(0, 7, Team.BLACK, PieceType.ROOK);
-		 addRooks(7, 0, Team.WHITE, PieceType.ROOK);
-		 addRooks(7, 7, Team.WHITE, PieceType.ROOK);
-		 addKnights(0, 1, Team.BLACK, PieceType.KNIGHT);
-		 addKnights(0, 6, Team.BLACK, PieceType.KNIGHT);
-		 addKnights(7, 1, Team.WHITE, PieceType.KNIGHT);
-		 addKnights(7, 6, Team.WHITE, PieceType.KNIGHT);
-		 addBishops(0, 2, Team.BLACK, PieceType.BISHOP);
-		 addBishops(0, 5, Team.BLACK, PieceType.BISHOP);
-		 addBishops(7, 2, Team.WHITE, PieceType.BISHOP);
-		 addBishops(7, 5, Team.WHITE, PieceType.BISHOP);
-		 addKings(0, 3, Team.BLACK, PieceType.KING);
-		 addKings(7, 4, Team.WHITE, PieceType.KING);
-		 addQueens(0, 4, Team.BLACK, PieceType.QUEEN);
-		 addQueens(7, 3, Team.WHITE, PieceType.QUEEN);
-	 }
-	
-	 private void addPawns(int row, int col, Team t, PieceType p){
-		 for(int x = row; x < col; x++){
+		 //ROOKS
+		 addPiece(new Rook(0, 0, Team.BLACK, PieceType.ROOK.toString()));
+		 addPiece(new Rook(0, 7, Team.BLACK, PieceType.ROOK.toString()));
+		 addPiece(new Rook(7, 0, Team.WHITE, PieceType.ROOK.toString()));
+		 addPiece(new Rook(7, 7, Team.WHITE, PieceType.ROOK.toString()));
+		 //KNIGHTS
+		 addPiece(new Knight(0, 1, Team.BLACK, PieceType.KNIGHT.toString()));
+		 addPiece(new Knight(0, 6, Team.BLACK, PieceType.KNIGHT.toString()));
+		 addPiece(new Knight(7, 1, Team.WHITE, PieceType.KNIGHT.toString()));
+		 addPiece(new Knight(7, 6, Team.WHITE, PieceType.KNIGHT.toString()));
+		 //BISHOPS
+		 addPiece(new Bishop(0, 2, Team.BLACK, PieceType.BISHOP.toString()));
+		 addPiece(new Bishop(0, 5, Team.BLACK, PieceType.BISHOP.toString()));
+		 addPiece(new Bishop(7, 2, Team.WHITE, PieceType.BISHOP.toString()));
+		 addPiece(new Bishop(7, 5, Team.WHITE, PieceType.BISHOP.toString()));
+		 //KINGS
+		 addPiece(new King(0, 3, Team.BLACK, PieceType.KING.toString()));
+		 addPiece(new King(7, 4, Team.WHITE, PieceType.KING.toString()));
+		 //QUEENS
+		 addPiece(new Queen(0, 4, Team.BLACK, PieceType.QUEEN.toString()));
+		 addPiece(new Queen(7, 3, Team.WHITE, PieceType.QUEEN.toString()));
+		 //PAWNS
+		 for(int x = 1; x < 2; x++){
 			 for(int y = 0; y < 8; y++){
-				 Piece pawn = new Pawn(x, y, t, p.toString());
-				 Point pos = new Point(x, y);
-				 pieces.put(pos, pawn);
-				 addToPlayer(pawn, t);
+				 addPiece(new Pawn(x, y, Team.BLACK, PieceType.PAWN.toString()));
 			 }
 		 }
+		 for(int x = 6; x < 7; x++){
+			 for(int y = 0; y < 8; y++){
+				 addPiece(new Pawn(x, y, Team.WHITE, PieceType.PAWN.toString()));
+			 }
+		 }	 
 	 }
 	 
-	 private void addRooks(int posX, int posY, Team t, PieceType p){
-		 Piece rook = new Rook(posX, posY, t, p.toString());
-		 Point pos = new Point(posX, posY);
-		 pieces.put(pos, rook);
-		 addToPlayer(rook, t);
+	 private void addPiece(Piece p){
+		 addToHashMaps(p);
 	 }
 	 
-	 private void addKnights(int posX, int posY, Team t, PieceType p){
-		 Piece knight = new Knight(posX, posY, t, p.toString());
-		 Point pos = new Point(posX, posY);
-		 pieces.put(pos, knight);
-		 addToPlayer(knight, t);
-	 }
-	 
-	 private void addBishops(int posX, int posY, Team t, PieceType p){
-		 Piece bishop = new Bishop(posX, posY, t, p.toString());
-		 Point pos = new Point(posX, posY);
-		 pieces.put(pos, bishop);
-		 addToPlayer(bishop, t);
-	 }
-	 
-	 private void addKings(int posX, int posY, Team t, PieceType p){
-		 Piece king = new King(posX, posY, t, p.toString());
-		 Point pos = new Point(posX, posY);
-		 pieces.put(pos, king);
-		 addToPlayer(king, t);
-	 }
-	 
-	 private void addQueens(int posX, int posY, Team t, PieceType p){
-		 Piece queen = new Queen(posX, posY, t, p.toString());
-		 Point pos = new Point(posX, posY);
-		 pieces.put(pos, queen);
-		 addToPlayer(queen, t);
+	 private void addToHashMaps(Piece p){
+		 Point pos = new Point(p.getLocation().x, p.getLocation().y);
+		 pieces.put(pos, p);
+		 addToPlayer(p, p.getTeam());
 	 }
 	 
 	 private void addToPlayer(Piece p, Team t){

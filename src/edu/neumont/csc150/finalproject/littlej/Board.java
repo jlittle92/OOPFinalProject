@@ -1,10 +1,16 @@
 package edu.neumont.csc150.finalproject.littlej;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.HashMap;
 
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,7 +38,7 @@ public class Board extends JFrame{
 		for(int i = 0; i < ROWS; i++){
 			for(int j = 0; j < COLUMNS; j++){
 				board[i][j] = new Square(i, j);
-				frame.add(board[i][j]);/*tried moving this below conditional, to no visible effect*/
+				/*tried moving this below conditional, to no visible effect*/
 				if((i % 2 == 0 && j % 2 == 0) || (i % 2 != 0 && j % 2 != 0)){
 					board[i][j].setBackground(WHITE);
 					placePiece(i, j);
@@ -41,7 +47,10 @@ public class Board extends JFrame{
 					board[i][j].setBackground(BLACK);
 					placePiece(i, j);
 				}
+				System.out.println(board[i][j].getX() + " " + board[i][j].getY());
+				frame.add(board[i][j]);
 			}
+			
 		}
 		
 		frame.setVisible(true);
@@ -52,7 +61,16 @@ public class Board extends JFrame{
 		Point pos = new Point(i, j);
 		/**/System.out.println("I got called");/*Does get called*/
 		if(pieces.containsKey(pos)){
-			board[i][j].setIcon(new ImageIcon(pieces.get(pos).getSource()));
+			Image img;
+			try {
+				img = ImageIO.read(getClass().getResource(pieces.get(pos).getSource().toString()));
+				//img.getScaledInstance(100, 100, hints)
+				board[i][j].setIcon((new ImageIcon(img)));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			/*System.out.println(pieces.get(pos).getSource());*/
 			//Pieces are in correct place!!!
 			/**/System.out.println("I set an icon");/*Does set*/

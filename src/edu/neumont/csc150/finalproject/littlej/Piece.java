@@ -6,11 +6,13 @@ public class Piece extends ImageComponent{
 
 	private Point position;
 	private String source;
+	private Team team;
 	
 	public Piece(int x, int y, Team t, String pieceName){
 		Point p = new Point(x, y);
 		setPosition(p);
 		setSource(t, pieceName);
+		setTeam(t);
 	}
 
 	public Point getPosition() {
@@ -29,4 +31,13 @@ public class Piece extends ImageComponent{
 		String src = "/" + source;
 		this.source = "/edu/neumont/csc150/finalproject/littlej/" + t.toString() + src + ".png";
 	}
+
+	public Team getTeam() {
+		return team;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
+	}
+	
 }
