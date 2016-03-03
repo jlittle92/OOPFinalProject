@@ -71,7 +71,7 @@ public class Chess {
 	 }
 	 
 	 private void addToHashMaps(Piece p){
-		 Point pos = new Point(p.getLocation().x, p.getLocation().y);
+		 Point pos = new Point(p.getPosition());
 		 pieces.put(pos, p);
 		 addToPlayer(p, p.getTeam());
 	 }

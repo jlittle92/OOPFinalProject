@@ -18,7 +18,7 @@ import javax.swing.JFrame;
 public class Board extends JFrame{
 
 	private static final int ROWS = 8, COLUMNS = 8;
-	private static final Color WHITE = Color.WHITE, BLACK = Color.BLACK;
+	private static final Color OFF_WHITE = Color.decode("#F2F2F2"), BLUE_ISH = Color.decode("#74C3F6");
 	private JButton [][] board;
 	private HashMap<Point, Piece> pieces;
 	
@@ -38,16 +38,22 @@ public class Board extends JFrame{
 		for(int i = 0; i < ROWS; i++){
 			for(int j = 0; j < COLUMNS; j++){
 				board[i][j] = new Square(i, j);
-				/*tried moving this below conditional, to no visible effect*/
 				if((i % 2 == 0 && j % 2 == 0) || (i % 2 != 0 && j % 2 != 0)){
-					board[i][j].setBackground(WHITE);
+					board[i][j].setBackground(OFF_WHITE);
+					/*
+					 * TO DO: Mouse Listener "Click"
+					 * */
+//					board[i][j].addMouseListener(/**/null);
 					placePiece(i, j);
 				}
 				else{
-					board[i][j].setBackground(BLACK);
+					board[i][j].setBackground(BLUE_ISH);
+					/*
+					 * TO DO: Mouse Listener "Click"
+					 * */
+//					board[i][j].addMouseListener(/**/null);
 					placePiece(i, j);
 				}
-				System.out.println(board[i][j].getX() + " " + board[i][j].getY());
 				frame.add(board[i][j]);
 			}
 			
@@ -56,29 +62,17 @@ public class Board extends JFrame{
 		frame.setVisible(true);
 	}
 	
-	//why aren't pieces showing up in UI...reference issue?
 	private void placePiece(int i, int j){
 		Point pos = new Point(i, j);
-		/**/System.out.println("I got called");/*Does get called*/
 		if(pieces.containsKey(pos)){
 			Image img;
 			try {
 				img = ImageIO.read(getClass().getResource(pieces.get(pos).getSource().toString()));
-				//img.getScaledInstance(100, 100, hints)
 				board[i][j].setIcon((new ImageIcon(img)));
+				System.out.println(i + " " + j);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			/*System.out.println(pieces.get(pos).getSource());*/
-			//Pieces are in correct place!!!
-			/**/System.out.println("I set an icon");/*Does set*/
-			/**/System.out.println(board[i][j].getIcon().toString());/**/
-			//Reference is correct, Icon still not adding to button
-			/*If you click in black squares where pieces are supposed to be a dot appears in center of square, but not 
-			in squares that aren't supposed to have pieces. This leads me to believe pieces not only exist, but exist
-			in the correct positions. So why don't they show up?*/
 		}
 	}
 }
