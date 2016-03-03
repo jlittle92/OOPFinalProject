@@ -2,7 +2,7 @@ package edu.neumont.csc150.finalproject.littlej;
 
 import java.awt.Point;
 
-public class Piece extends ImageComponent{
+public class Piece extends ImageComponent implements Movable{
 
 	private Point position;
 	private String source;
@@ -38,6 +38,11 @@ public class Piece extends ImageComponent{
 
 	public void setTeam(Team team) {
 		this.team = team;
+	}
+
+	public void move() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

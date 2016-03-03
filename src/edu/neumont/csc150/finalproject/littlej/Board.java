@@ -38,21 +38,12 @@ public class Board extends JFrame{
 		for(int i = 0; i < ROWS; i++){
 			for(int j = 0; j < COLUMNS; j++){
 				board[i][j] = new Square(i, j);
+				placePiece(i, j); 
 				if((i % 2 == 0 && j % 2 == 0) || (i % 2 != 0 && j % 2 != 0)){
 					board[i][j].setBackground(OFF_WHITE);
-					/*
-					 * TO DO: Mouse Listener "Click"
-					 * */
-//					board[i][j].addMouseListener(/**/null);
-					placePiece(i, j);
 				}
 				else{
 					board[i][j].setBackground(BLUE_ISH);
-					/*
-					 * TO DO: Mouse Listener "Click"
-					 * */
-//					board[i][j].addMouseListener(/**/null);
-					placePiece(i, j);
 				}
 				frame.add(board[i][j]);
 			}
@@ -65,6 +56,7 @@ public class Board extends JFrame{
 	private void placePiece(int i, int j){
 		Point pos = new Point(i, j);
 		if(pieces.containsKey(pos)){
+			((Square) board[i][j]).setPiece(pieces.get(pos));
 			Image img;
 			try {
 				img = ImageIO.read(getClass().getResource(pieces.get(pos).getSource().toString()));
