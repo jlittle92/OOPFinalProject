@@ -2,7 +2,7 @@ package edu.neumont.csc150.finalproject.littlej;
 
 import java.awt.Point;
 
-public class Piece extends ImageComponent implements Movable{
+public abstract class Piece extends ImageComponent{
 
 	private Point position;
 	private String source;
@@ -40,9 +40,27 @@ public class Piece extends ImageComponent implements Movable{
 		this.team = team;
 	}
 
-	public void move() {
-		// TODO Auto-generated method stub
-		
+	public void move(Point source, Point destination) {
+		if(isValid(source, destination)){
+			setPosition(destination);
+		}
+		else{
+			System.out.println("That's an invalid move. Try again.");
+		}
 	}
 	
+	public boolean isValid(Point source, Point destination) {
+		if(!isPathBlocked(source, destination) && isLegalForPiece(source, destination)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
+	public boolean isPathBlocked(Point source, Point destination) {
+		return false;
+	}
+	
+	public abstract boolean isLegalForPiece(Point source, Point destination);
 }
