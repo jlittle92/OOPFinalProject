@@ -13,6 +13,7 @@ public abstract class Piece extends ImageComponent{
 		setPosition(p);
 		setSource(t, pieceName);
 		setTeam(t);
+		System.out.println(getPosition());
 	}
 
 	public Point getPosition() {
@@ -40,12 +41,14 @@ public abstract class Piece extends ImageComponent{
 		this.team = team;
 	}
 
-	public void move(Point source, Point destination) {
+	public boolean move(Point source, Point destination) {
 		if(isValid(source, destination)){
 			setPosition(destination);
+			return true;
 		}
 		else{
 			System.out.println("That's an invalid move. Try again.");
+			return false;
 		}
 	}
 	
