@@ -1,17 +1,12 @@
 package edu.neumont.csc150.finalproject.littlej;
 
 import java.awt.Point;
+import java.util.HashMap;
 
 public class Bishop extends Piece{
 
-	public Bishop(int x, int y, Team t, String pieceName) {
-		super(x, y, t, pieceName);
-		// TODO Auto-generated constructor stub
-	}
-
-	public void move() {
-		// TODO Auto-generated method stub
-		
+	public Bishop(int x, int y, Team t, PieceType type) {
+		super(x, y, t, type);
 	}
 
 	@Override
@@ -21,6 +16,55 @@ public class Bishop extends Piece{
 		}
 		else if(((source.x - destination.x) * -1) == source.y - destination.y){
 			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean inTheWay(HashMap<Point, Square> squares, Point kingPos) {
+		Square s = null;
+		int y = 0;
+		if(isLegalForPiece(getPosition(), kingPos)){
+			if(getPosition().x > kingPos.x && getPosition().y > kingPos.y){
+				y = getPosition().y - 1;
+				for(int x = getPosition().x - 1; x > kingPos.x; x--){
+					s = squares.get(new Point(x, y));
+					if(s.getIcon() != null && s.getPiece().getType() != PieceType.KING){
+						return true;
+					}
+					y--;
+				}
+			}
+			else if(getPosition().x > kingPos.x && getPosition().y < kingPos.y){
+				y = getPosition().y + 1;
+				for(int x = getPosition().x - 1; x > kingPos.x; x--){
+					s = squares.get(new Point(x, y));
+					if(s.getIcon() != null && s.getPiece().getType() != PieceType.KING){
+						return true;
+					}
+					y++;
+				}
+			}
+			else if(getPosition().x < kingPos.x && getPosition().y > kingPos.y){
+				y = getPosition().y - 1;
+				for(int x = getPosition().x + 1; x < kingPos.x; x++){
+					s = squares.get(new Point(x, y));
+					if(s.getIcon() != null && s.getPiece().getType() != PieceType.KING){
+						return true;
+					}
+					y--;
+				}
+			}
+			else if(getPosition().x < kingPos.x && getPosition().y < kingPos.y){
+				y = getPosition().y + 1;
+				for(int x = getPosition().x + 1; x < kingPos.x; x++){
+					s = squares.get(new Point(x, y));
+					if(s.getIcon() != null && s.getPiece().getType() != PieceType.KING){
+						return true;
+					}
+					y++;
+				}
+			}
 		}
 		return false;
 	}

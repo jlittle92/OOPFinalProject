@@ -10,6 +10,7 @@ public class Square extends JButton{
 
 	private Point location;
 	private Piece piece;
+	private final int WHITE_PROMOTE = 0, BLACK_PROMOTE = 7;
 	
 	public Square(int x, int y) {
 		setLocation(new Point(x, y));
@@ -32,4 +33,17 @@ public class Square extends JButton{
 		this.piece = piece;
 	}
 	
+	public boolean promote(Piece p, Point destination){
+		if(p.getTeam() == Team.WHITE){
+			if(destination.x == WHITE_PROMOTE){
+				return true;
+			}
+		}
+		else if(p.getTeam() == Team.BLACK){
+			if(destination.x == BLACK_PROMOTE){
+				return true;
+			}
+		}
+		return false;
+	}
 }

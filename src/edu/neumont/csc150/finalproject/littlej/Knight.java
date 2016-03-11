@@ -1,17 +1,12 @@
 package edu.neumont.csc150.finalproject.littlej;
 
 import java.awt.Point;
+import java.util.HashMap;
 
 public class Knight extends Piece{
 
-	public Knight(int x, int y, Team t, String pieceName) {
-		super(x, y, t, pieceName);
-		// TODO Auto-generated constructor stub
-	}
-
-	public void move() {
-		// TODO Auto-generated method stub
-		
+	public Knight(int x, int y, Team t, PieceType type) {
+		super(x, y, t, type);
 	}
 
 	@Override
@@ -23,6 +18,11 @@ public class Knight extends Piece{
 			return true;
 		}
 		return false; 
+	}
+
+	@Override
+	public boolean inTheWay(HashMap<Point, Square> squares, Point kingPos) {
+		return false;
 	}
 
 }
